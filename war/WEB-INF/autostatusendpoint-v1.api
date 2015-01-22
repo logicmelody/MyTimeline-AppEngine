@@ -1,0 +1,196 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://dl-mytimeline.appspot.com/_ah/api",
+  "name" : "autostatusendpoint",
+  "version" : "v1",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://dl-mytimeline.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "ownerDomain" : "dl.com",
+  "ownerName" : "dl.com",
+  "packagePath" : "mytimeline",
+  "methods" : {
+    "autostatusendpoint.updateAutoStatus" : {
+      "path" : "autostatus",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.AutoStatusEndpoint.updateAutoStatus",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "autostatusendpoint.listAutoStatus" : {
+      "path" : "autostatus",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.AutoStatusEndpoint.listAutoStatus",
+      "request" : {
+        "parameters" : {
+          "cursor" : {
+            "type" : "string",
+            "required" : false
+          },
+          "limit" : {
+            "type" : "int32",
+            "required" : false
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "autostatusendpoint.getAutoStatus" : {
+      "path" : "autostatus/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.AutoStatusEndpoint.getAutoStatus",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "autostatusendpoint.insertAutoStatus" : {
+      "path" : "autostatus",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.AutoStatusEndpoint.insertAutoStatus",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "autostatusendpoint.removeAutoStatus" : {
+      "path" : "autostatus/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.AutoStatusEndpoint.removeAutoStatus",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "AutoStatus" : {
+        "id" : "AutoStatus",
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "content" : {
+            "type" : "string"
+          },
+          "timestamp" : {
+            "type" : "string",
+            "format" : "int64"
+          }
+        }
+      },
+      "CollectionResponse_AutoStatus" : {
+        "id" : "CollectionResponse_AutoStatus",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "AutoStatus"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.dl.mytimeline.AutoStatusEndpoint.updateAutoStatus" : {
+        "request" : {
+          "$ref" : "AutoStatus"
+        },
+        "response" : {
+          "$ref" : "AutoStatus"
+        }
+      },
+      "com.dl.mytimeline.AutoStatusEndpoint.listAutoStatus" : {
+        "response" : {
+          "$ref" : "CollectionResponse_AutoStatus"
+        }
+      },
+      "com.dl.mytimeline.AutoStatusEndpoint.getAutoStatus" : {
+        "response" : {
+          "$ref" : "AutoStatus"
+        }
+      },
+      "com.dl.mytimeline.AutoStatusEndpoint.insertAutoStatus" : {
+        "request" : {
+          "$ref" : "AutoStatus"
+        },
+        "response" : {
+          "$ref" : "AutoStatus"
+        }
+      },
+      "com.dl.mytimeline.AutoStatusEndpoint.removeAutoStatus" : {
+      }
+    }
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "extends" : "thirdParty.api",
+  "abstract" : false,
+  "root" : "https://dl-mytimeline.appspot.com/_ah/api",
+  "name" : "statusapi",
+  "version" : "v1",
+  "description" : "An API to manage personal timeline status",
+  "defaultVersion" : false,
+  "adapter" : {
+    "bns" : "https://dl-mytimeline.appspot.com/_ah/spi",
+    "deadline" : 65.0,
+    "type" : "lily"
+  },
+  "auth" : {
+    "allowCookieAuth" : false
+  },
+  "frontendLimits" : {
+    "unregisteredUserQps" : -1,
+    "unregisteredQps" : -1,
+    "unregisteredDaily" : -1,
+    "rules" : [ ]
+  },
+  "cacheControl" : {
+    "type" : "no-cache",
+    "maxAge" : 0
+  },
+  "methods" : {
+    "statusapi.getStatus" : {
+      "path" : "status/{id}",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.service.StatusServiceAPI.getStatus",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int32",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "statusapi.remove" : {
+      "path" : "status/{id}",
+      "httpMethod" : "DELETE",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.service.StatusServiceAPI.removeStatus",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int32",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "empty"
+      }
+    },
+    "statusapi.update" : {
+      "path" : "status",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.service.StatusServiceAPI.updateStatus",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "statusapi.list" : {
+      "path" : "statuscollection",
+      "httpMethod" : "GET",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.service.StatusServiceAPI.getStatuses",
+      "request" : {
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
+    "statusapi.add" : {
+      "path" : "addStatus/{id}/{content}/{timestamp}",
+      "httpMethod" : "POST",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.service.StatusServiceAPI.addStatus",
+      "request" : {
+        "parameters" : {
+          "id" : {
+            "type" : "int32",
+            "required" : true
+          },
+          "content" : {
+            "type" : "string",
+            "required" : true
+          },
+          "timestamp" : {
+            "type" : "int64",
+            "required" : true
+          }
+        },
+        "body" : "empty"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    }
+  },
+  "descriptor" : {
+    "schemas" : {
+      "Status" : {
+        "id" : "Status",
+        "type" : "object",
+        "properties" : {
+          "timestamp" : {
+            "type" : "string",
+            "format" : "int64"
+          },
+          "id" : {
+            "type" : "integer"
+          },
+          "content" : {
+            "type" : "string"
+          }
+        }
+      },
+      "StatusCollection" : {
+        "id" : "StatusCollection",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "Status"
+            }
+          }
+        }
+      }
+    },
+    "methods" : {
+      "com.dl.mytimeline.service.StatusServiceAPI.getStatus" : {
+        "response" : {
+          "$ref" : "Status"
+        }
+      },
+      "com.dl.mytimeline.service.StatusServiceAPI.removeStatus" : {
+      },
+      "com.dl.mytimeline.service.StatusServiceAPI.updateStatus" : {
+        "request" : {
+          "$ref" : "Status"
+        },
+        "response" : {
+          "$ref" : "Status"
+        }
+      },
+      "com.dl.mytimeline.service.StatusServiceAPI.getStatuses" : {
+        "response" : {
+          "$ref" : "StatusCollection"
+        }
+      },
+      "com.dl.mytimeline.service.StatusServiceAPI.addStatus" : {
+        "response" : {
+          "$ref" : "Status"
+        }
+      }
+    }
+  }
+}
