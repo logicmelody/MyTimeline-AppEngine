@@ -102,9 +102,29 @@ public class AutoStatusEndpoint {
     public AutoStatus insertAutoStatus(AutoStatus autostatus) {
         PersistenceManager mgr = getPersistenceManager();
         try {
-            if (containsAutoStatus(autostatus)) {
-                throw new EntityExistsException("Object already exists");
+            if (autostatus.getId() != null) {
+                if (containsAutoStatus(autostatus)) {
+                    throw new EntityExistsException("Object already exists");
+                }
             }
+            mgr.makePersistent(autostatus);
+        } finally {
+            mgr.close();
+        }
+        return autostatus;
+    }
+
+    @ApiMethod(name = "quoteAndInsertAutoStatus")
+    public AutoStatus quoteAndInsertAutoStatus(AutoStatus autostatus) {
+        PersistenceManager mgr = getPersistenceManager();
+        try {
+            if (autostatus.getId() != null) {
+                if (containsAutoStatus(autostatus)) {
+                    throw new EntityExistsException("Object already exists");
+                }
+            }
+            String content = autostatus.getContent();
+            autostatus.setContent('"' + content + '"');
             mgr.makePersistent(autostatus);
         } finally {
             mgr.close();

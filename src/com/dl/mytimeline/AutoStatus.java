@@ -19,6 +19,9 @@ public class AutoStatus {
     @Persistent
     private Long timestamp;
 
+    @Persistent
+    private String subject;
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -29,6 +32,10 @@ public class AutoStatus {
 
     public void setTimestamp(Long timastamp) {
         this.timestamp = timastamp;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public Long getId() {
@@ -43,4 +50,7 @@ public class AutoStatus {
         return this.timestamp;
     }
 
+    public String getSubject() {
+        return this.subject;
+    }
 }
