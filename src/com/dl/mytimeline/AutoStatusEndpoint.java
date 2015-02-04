@@ -2,11 +2,12 @@
 package com.dl.mytimeline;
 
 import com.dl.mytimeline.PMF;
-
+import com.google.api.server.spi.auth.common.User;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
 import com.google.api.server.spi.response.CollectionResponse;
+import com.google.api.server.spi.response.UnauthorizedException;
 import com.google.appengine.api.datastore.Cursor;
 import com.google.appengine.datanucleus.query.JDOCursorHelper;
 
@@ -125,6 +126,31 @@ public class AutoStatusEndpoint {
             }
             String content = autostatus.getContent();
             autostatus.setContent('"' + content + '"');
+            mgr.makePersistent(autostatus);
+        } finally {
+            mgr.close();
+        }
+        return autostatus;
+    }
+
+    @ApiMethod(name = "protectInsertAutoStatus", clientIds = {
+            Constants.WEB_CLIENT_ID,
+            Constants.ANDROID_CLIENT_ID,
+            com.google.api.server.spi.Constant.API_EXPLORER_CLIENT_ID
+    }, audiences = {
+        Constants.ANDROID_AUDIENCE
+    })
+    public AutoStatus protectInsertAutoStatus(AutoStatus autostatus, User user) throws UnauthorizedException {
+        if (user == null) throw new UnauthorizedException("User is Not Valid");
+        PersistenceManager mgr = getPersistenceManager();
+        try {
+            if (autostatus.getId() != null) {
+                if (containsAutoStatus(autostatus)) {
+                    throw new EntityExistsException("Object already exists");
+                }
+            }
+            String content = autostatus.getContent();
+            autostatus.setContent(content + " (This is from protective API)");
             mgr.makePersistent(autostatus);
         } finally {
             mgr.close();

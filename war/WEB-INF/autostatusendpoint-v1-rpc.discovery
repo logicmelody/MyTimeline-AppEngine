@@ -1,11 +1,11 @@
 {
  "kind": "discovery#rpcDescription",
- "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/7ewMXzvQc-Per4glMpRc5R505QQ\"",
+ "etag": "\"c05bU6zpvXPOpQakG5gG3IOJh8Y/P-4-gwGFnJ4zJGuB9UVkaK1SzEE\"",
  "discoveryVersion": "v1",
  "id": "autostatusendpoint:v1",
  "name": "autostatusendpoint",
  "version": "v1",
- "description": "An API to manage personal timeline status",
+ "description": "This is an API",
  "ownerDomain": "dl.com",
  "ownerName": "dl.com",
  "packagePath": "mytimeline",
@@ -157,6 +157,40 @@
    },
    "returns": {
     "$ref": "CollectionResponse_AutoStatus"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "autostatusendpoint.protectInsertAutoStatus": {
+   "id": "autostatusendpoint.protectInsertAutoStatus",
+   "parameters": {
+    "resource": {
+     "$ref": "AutoStatus"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "AutoStatus"
+   },
+   "scopes": [
+    "https://www.googleapis.com/auth/userinfo.email"
+   ]
+  },
+  "autostatusendpoint.quoteAndInsertAutoStatus": {
+   "id": "autostatusendpoint.quoteAndInsertAutoStatus",
+   "parameters": {
+    "resource": {
+     "$ref": "AutoStatus"
+    }
+   },
+   "parameterOrder": [
+    "resource"
+   ],
+   "returns": {
+    "$ref": "AutoStatus"
    },
    "scopes": [
     "https://www.googleapis.com/auth/userinfo.email"
