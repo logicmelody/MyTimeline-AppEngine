@@ -134,15 +134,15 @@
         "id" : "Status",
         "type" : "object",
         "properties" : {
+          "content" : {
+            "type" : "string"
+          },
           "timestamp" : {
             "type" : "string",
             "format" : "int64"
           },
           "id" : {
             "type" : "integer"
-          },
-          "content" : {
-            "type" : "string"
           }
         }
       },

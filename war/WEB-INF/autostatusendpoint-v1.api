@@ -27,6 +27,22 @@
   "ownerName" : "dl.com",
   "packagePath" : "mytimeline",
   "methods" : {
+    "autostatusendpoint.updateAutoStatus" : {
+      "path" : "autostatus",
+      "httpMethod" : "PUT",
+      "authLevel" : "NONE",
+      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
+      "audiences" : [ ],
+      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
+      "rosyMethod" : "com.dl.mytimeline.AutoStatusEndpoint.updateAutoStatus",
+      "request" : {
+        "body" : "autoTemplate(backendRequest)",
+        "bodyName" : "resource"
+      },
+      "response" : {
+        "body" : "autoTemplate(backendResponse)"
+      }
+    },
     "autostatusendpoint.listAutoStatus" : {
       "path" : "autostatus",
       "httpMethod" : "GET",
@@ -47,22 +63,6 @@
           }
         },
         "body" : "empty"
-      },
-      "response" : {
-        "body" : "autoTemplate(backendResponse)"
-      }
-    },
-    "autostatusendpoint.updateAutoStatus" : {
-      "path" : "autostatus",
-      "httpMethod" : "PUT",
-      "authLevel" : "NONE",
-      "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ ],
-      "clientIds" : [ "292824132082.apps.googleusercontent.com" ],
-      "rosyMethod" : "com.dl.mytimeline.AutoStatusEndpoint.updateAutoStatus",
-      "request" : {
-        "body" : "autoTemplate(backendRequest)",
-        "bodyName" : "resource"
       },
       "response" : {
         "body" : "autoTemplate(backendResponse)"
@@ -147,7 +147,7 @@
       "httpMethod" : "POST",
       "authLevel" : "NONE",
       "scopes" : [ "https://www.googleapis.com/auth/userinfo.email" ],
-      "audiences" : [ "404691531067-nqru6jcsos684cl9hve4ihqtk03bahkq.apps.googleusercontent.com" ],
+      "audiences" : [ "404691531067-jlcfkbi7r4gk1b4ka4uq3qtodbkbspvr.apps.googleusercontent.com" ],
       "clientIds" : [ "404691531067-jlcfkbi7r4gk1b4ka4uq3qtodbkbspvr.apps.googleusercontent.com", "404691531067-nqru6jcsos684cl9hve4ihqtk03bahkq.apps.googleusercontent.com", "292824132082.apps.googleusercontent.com" ],
       "rosyMethod" : "com.dl.mytimeline.AutoStatusEndpoint.protectInsertAutoStatus",
       "request" : {
@@ -161,21 +161,6 @@
   },
   "descriptor" : {
     "schemas" : {
-      "CollectionResponse_AutoStatus" : {
-        "id" : "CollectionResponse_AutoStatus",
-        "type" : "object",
-        "properties" : {
-          "items" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "AutoStatus"
-            }
-          },
-          "nextPageToken" : {
-            "type" : "string"
-          }
-        }
-      },
       "AutoStatus" : {
         "id" : "AutoStatus",
         "type" : "object",
@@ -192,20 +177,35 @@
             "format" : "int64"
           }
         }
+      },
+      "CollectionResponse_AutoStatus" : {
+        "id" : "CollectionResponse_AutoStatus",
+        "type" : "object",
+        "properties" : {
+          "items" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "AutoStatus"
+            }
+          },
+          "nextPageToken" : {
+            "type" : "string"
+          }
+        }
       }
     },
     "methods" : {
-      "com.dl.mytimeline.AutoStatusEndpoint.listAutoStatus" : {
-        "response" : {
-          "$ref" : "CollectionResponse_AutoStatus"
-        }
-      },
       "com.dl.mytimeline.AutoStatusEndpoint.updateAutoStatus" : {
         "request" : {
           "$ref" : "AutoStatus"
         },
         "response" : {
           "$ref" : "AutoStatus"
+        }
+      },
+      "com.dl.mytimeline.AutoStatusEndpoint.listAutoStatus" : {
+        "response" : {
+          "$ref" : "CollectionResponse_AutoStatus"
         }
       },
       "com.dl.mytimeline.AutoStatusEndpoint.quoteAndInsertAutoStatus" : {
